@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Online - Lunaro Films</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reuse Variables */
+    :root {
+        --primary-font: 'Playfair Display', serif;
+        --secondary-font: 'Raleway', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+        font-family: var(--secondary-font);
+        color: #333;
+        background: #fff;
+        line-height: 1.6;
+    }
+
+    /* Header */
+    .page-header {
+        text-align: center;
+        padding: 60px 20px;
+        background: #f9f9f9;
+    }
+    .page-header h1 {
+        font-family: var(--primary-font);
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+    .divider { width: 40px; height: 1px; background: #000; margin: 0 auto; }
+
+    /* Back Button */
+    .back-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        text-decoration: none;
+        color: #000;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    /* Services Grid */
+    .services-container {
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+    }
+
+    .service-card {
+        border: 1px solid #eee;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+    .service-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+    .service-img {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .service-details { padding: 30px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    
+    .service-details h2 { font-family: var(--primary-font); font-size: 1.5rem; margin-bottom: 10px; }
+    .service-meta { color: #666; font-size: 0.9rem; margin-bottom: 20px; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 10px 0; }
+
+    .book-btn {
+        background: #000;
+        color: #fff;
+        border: none;
+        padding: 12px 0;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .book-btn:hover { background: #444; }
+
+    @media (max-width: 768px) {
+        .page-header h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="back-btn">&larr; Back to Home</a>
+
+  <header class="page-header">
+    <h1>Book Online</h1>
+    <div class="divider"></div>
+  </header>
+
+  <section class="services-container">
+    <div class="service-card">
+      <img src="1.jpg" alt="Wedding" class="service-img">
+      <div class="service-details">
+        <div>
+            <h2>Wedding Collection</h2>
+            <div class="service-meta">1 hr | Introductory Meeting</div>
+            <p>Discuss your vision for the perfect day.</p>
+        </div>
+        <button class="book-btn">Book Now</button>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <img src="2.jpg" alt="Couples" class="service-img">
+      <div class="service-details">
+        <div>
+            <h2>Couples Session</h2>
+            <div class="service-meta">1 hr | Engagement Shoot</div>
+            <p>Capture the love before the big day.</p>
+        </div>
+        <button class="book-btn">Book Now</button>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <img src="3.jpg" alt="Events" class="service-img">
+      <div class="service-details">
+        <div>
+            <h2>Special Events</h2>
+            <div class="service-meta">2 hr | Party Coverage</div>
+            <p>Perfect for birthdays and corporate events.</p>
+        </div>
+        <button class="book-btn">Book Now</button>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
