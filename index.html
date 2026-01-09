@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
     <style>
-        /* --- RESET & VARIABLES (PASTEL/BEIGE THEME [cite: 23]) --- */
+        /* --- RESET & VARIABLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary-font: 'Playfair Display', serif;
             --secondary-font: 'Raleway', sans-serif;
-            --text-color: #4a4a4a; /* Softer black */
-            --bg-color: #fdfcf8; /* Cream/Off-white */
-            --accent-color: #d2b48c; /* Tan/Beige */
-            --pastel-highlight: #f2e8dc; /* Light Beige */
+            --text-color: #4a4a4a; 
+            --bg-color: #fdfcf8; 
+            --accent-color: #d2b48c; 
+            --pastel-highlight: #f2e8dc; 
         }
 
         body {
@@ -32,44 +32,35 @@
         ul { list-style: none; }
         img { width: 100%; display: block; }
 
-        /* --- HEADER --- */
-        header {
-            text-align: center;
-            padding: 30px 20px;
-            background: var(--bg-color);
-        }
-
-        .logo-area h1 {
-            font-family: var(--primary-font);
-            font-size: 3rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            color: #2c2c2c;
-        }
-
-        .logo-area p {
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION & LOGO --- */
         .navbar {
             display: flex;
-            justify-content: center;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px; 
             position: sticky;
             top: 0;
-            background: rgba(253, 252, 248, 0.95);
+            background: rgba(253, 252, 248, 0.98);
+            border-bottom: 1px solid #eee;
             z-index: 1000;
         }
 
-        .nav-links { display: flex; gap: 40px; }
+        /* --- LOGO STYLING (COLOR FIX) --- */
+        .logo-image {
+            height: 60px; /* Increased height slightly for better visibility */
+            width: auto;
+            object-fit: contain;
+            /* This filter turns the white logo to Black/Dark Grey */
+            filter: invert(1) brightness(0.2); 
+            transition: 0.3s;
+        }
+        
+        /* Optional: Hover effect to turn logo slightly brownish/accent color */
+        .nav-logo:hover .logo-image {
+            opacity: 0.7;
+        }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links li a {
             font-size: 0.85rem;
             letter-spacing: 1.5px;
@@ -79,49 +70,49 @@
         .nav-links li a:hover { color: var(--accent-color); }
         .menu-icon { display: none; font-size: 1.5rem; cursor: pointer; background: none; border: none; }
 
-        /* --- HERO SLIDESHOW  --- */
+        /* --- HERO SLIDESHOW (SLIDING EFFECT) --- */
         .hero {
             height: 85vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-align: center;
+            width: 100%;
             overflow: hidden;
+            position: relative;
         }
 
-        /* Pure CSS Slideshow overlay */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+        .slider {
+            width: 300%;
+            height: 100%;
+            display: flex;
+            position: relative;
+            animation: slideAnimation 20s infinite ease-in-out;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: center;
-            /* Replace these URLs with your slideshow images */
-            background-image: url('back.jpg'); 
-            animation: slideShow 20s infinite;
-            z-index: -1;
-            filter: brightness(0.6); /* Darken for text readability */
         }
 
-        @keyframes slideShow {
-            0% { background-image: url('back.jpg'); }
-            33% { background-image: url('back1.jpg'); } /* Add more images here */
-            66% { background-image: url('back.jpg'); }
-            100% { background-image: url('back1.jpg'); }
+        /* BACKGROUND IMAGES */
+        .slide:nth-child(1) { background-image: url('back.jpg'); }
+        .slide:nth-child(2) { background-image: url('back1.jpg'); }
+        .slide:nth-child(3) { background-image: url('back.jpg'); }
+
+        @keyframes slideAnimation {
+            0% { transform: translateX(0); }
+            30% { transform: translateX(0); }
+            35% { transform: translateX(-33.33%); }
+            65% { transform: translateX(-33.33%); }
+            70% { transform: translateX(-66.66%); }
+            100% { transform: translateX(-66.66%); }
         }
 
-        .hero-content h2 {
-            font-family: var(--primary-font);
-            font-size: 3.5rem; /*  Tagline size */
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            max-width: 900px;
-            padding: 0 20px;
-            line-height: 1.2;
+        .hero::after {
+            content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.3); pointer-events: none;
         }
 
-        /* --- ABOUT SECTION [cite: 4, 5, 6, 7] --- */
+        /* --- SECTIONS --- */
         .about {
             display: flex;
             max-width: 1100px;
@@ -142,7 +133,6 @@
         }
         .about-text p { margin-bottom: 15px; color: #666; font-size: 1.05rem;}
 
-        /* --- SERVICES / PORTFOLIO SECTION [cite: 9, 10-13, 15] --- */
         .services-section {
             background: var(--pastel-highlight);
             padding: 80px 20px;
@@ -178,7 +168,12 @@
             letter-spacing: 1px;
         }
 
-        /* Photo/Video Buttons */
+        .service-main-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
         .option-btn {
             display: block;
             width: 100%;
@@ -196,7 +191,6 @@
         .option-btn:hover { background: var(--accent-color); color: #fff; }
         .option-btn i { margin-right: 8px; }
 
-        /* --- TESTIMONIALS [cite: 17, 18] --- */
         .testimonial-section {
             padding: 80px 20px;
             max-width: 900px;
@@ -213,7 +207,6 @@
         .testimonial-text { font-style: italic; font-size: 1.2rem; margin-bottom: 20px; }
         .client-name { font-weight: bold; font-family: var(--primary-font); }
 
-        /* --- CONTACT & FOOTER --- */
         .contact-banner {
             background-color: #2c2c2c;
             color: #fff;
@@ -238,43 +231,30 @@
             border-top: 1px solid #eee;
         }
 
-        /* --- FLOATING BUTTONS  --- */
+        /* --- FLOATING BTNS --- */
         .floating-btns {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 2000;
+            position: fixed; bottom: 20px; right: 20px;
+            display: flex; flex-direction: column; gap: 10px; z-index: 2000;
         }
         .float-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         .wa-btn { background: #25D366; }
         .ig-btn { background: #C13584; }
 
-        /* --- VIDEO MODAL --- */
+        /* --- MODAL --- */
         .modal {
-            display: none; 
-            position: fixed; z-index: 5000; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            align-items: center; justify-content: center;
+            display: none; position: fixed; z-index: 5000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;
         }
         .modal-content { position: relative; width: 80%; max-width: 800px; aspect-ratio: 16/9; }
         .close-modal { position: absolute; top: -40px; right: 0; color: #fff; font-size: 2rem; cursor: pointer; }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .navbar { justify-content: space-between; padding: 15px 20px; }
+            .navbar { padding: 15px 20px; }
             .menu-icon { display: block; }
             .nav-links {
                 position: absolute; top: 100%; left: 0; width: 100%;
@@ -283,37 +263,32 @@
             }
             .nav-links.active { display: flex; }
             .about { flex-direction: column; }
-            .hero-content h2 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <header id="home">
-        <div class="logo-area">
-            <h1>Lunaro Films</h1>
-            <p>Bringing Brands to Life & Love Stories to Film</p> </div>
-    </header>
-
     <nav class="navbar">
-        <div style="width: 100%; max-width: 1200px; display: flex; justify-content: center; align-items: center; position: relative;">
-            <button class="menu-icon" id="menu-toggle"><i class="fas fa-bars"></i></button>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Our Services</a></li>
-                <li><a href="albumb.html">Portfolio</a></li>
-                <li><a href="book.html">Book Now</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-            </ul>
+        <div class="nav-logo">
+            <a href="#home"><img src="logo.png" alt="Lunaro Films" class="logo-image"></a>
         </div>
+        <button class="menu-icon" id="menu-toggle"><i class="fas fa-bars"></i></button>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Our Services</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="book.html">Book Now</a></li>
+        </ul>
     </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h2>"BRINGING BRANDS TO LIFE & LOVE STORIES TO FILM"</h2> 
+    <div class="hero" id="home">
+        <div class="slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
         </div>
-    </section>
+    </div>
 
     <section class="about" id="about">
         <div class="about-img">
@@ -332,24 +307,28 @@
         
         <div class="service-grid">
             <div class="service-card">
+                <i class="fas fa-heart service-main-icon"></i>
                 <h3>Pre Wedding</h3>
                 <button class="option-btn" onclick="window.location.href='albumb.html?filter=prewedding'"><i class="fas fa-camera"></i> Photos</button>
                 <button class="option-btn" onclick="openVideo('YOUR_VIDEO_ID_HERE')"><i class="fas fa-play"></i> Cinematic Film</button>
             </div>
 
             <div class="service-card">
+                <i class="fas fa-ring service-main-icon"></i>
                 <h3>Wedding</h3>
                 <button class="option-btn" onclick="window.location.href='albumb.html?filter=wedding'"><i class="fas fa-camera"></i> Photos</button>
                 <button class="option-btn" onclick="openVideo('YOUR_VIDEO_ID_HERE')"><i class="fas fa-play"></i> Cinematic Film</button>
             </div>
 
             <div class="service-card">
+                <i class="fas fa-user-tie service-main-icon"></i>
                 <h3>Corporate</h3>
                 <button class="option-btn" onclick="window.location.href='albumb.html?filter=corporate'"><i class="fas fa-camera"></i> Photos</button>
                 <button class="option-btn" onclick="openVideo('YOUR_VIDEO_ID_HERE')"><i class="fas fa-play"></i> Brand Films</button>
             </div>
 
             <div class="service-card">
+                <i class="fas fa-glass-cheers service-main-icon"></i>
                 <h3>Celebrations</h3>
                 <button class="option-btn" onclick="window.location.href='albumb.html?filter=events'"><i class="fas fa-camera"></i> Photos</button>
                 <button class="option-btn" onclick="openVideo('YOUR_VIDEO_ID_HERE')"><i class="fas fa-play"></i> Event Film</button>
@@ -364,7 +343,7 @@
             <p class="testimonial-text">"Lunaro Films captured our wedding beautifully. The attention to detail and the cinematic quality made our memories look like a movie!"</p>
             <p class="client-name">- Happy Client</p>
         </div>
-        </section>
+    </section>
 
     <section class="contact-banner">
         <h2>Ready to tell your story?</h2>
@@ -372,7 +351,7 @@
     </section>
 
     <footer>
-        <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="cursor: pointer;">
             <i class="fas fa-chevron-up"></i><br>Back to Top
         </div>
         <br><br>
@@ -393,16 +372,13 @@
     </div>
 
     <script>
-        // Mobile Menu
         document.getElementById('menu-toggle').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
         });
 
-        // Video Modal Logic 
         function openVideo(videoId) {
             const modal = document.getElementById('videoModal');
             const iframe = document.getElementById('youtubeFrame');
-            // Check if videoId is placeholder
             if(videoId === 'YOUR_VIDEO_ID_HERE') {
                 alert("Please add YouTube Video IDs in the HTML code.");
                 return;
@@ -414,7 +390,7 @@
         function closeVideo() {
             const modal = document.getElementById('videoModal');
             const iframe = document.getElementById('youtubeFrame');
-            iframe.src = ''; // Stop video
+            iframe.src = '';
             modal.style.display = 'none';
         }
     </script>
